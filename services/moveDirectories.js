@@ -1,5 +1,4 @@
 const deleteDirectories = require('../services/deleteDirectories');
-const createDirectories = require('../services/createDirectories');
 
 module.exports = function moveDirectories(command, directories) {
     const args = command.split(' ').slice(1);
@@ -7,9 +6,9 @@ module.exports = function moveDirectories(command, directories) {
 
     const sourceObj = getSourceObj(sourceDirectory, directories);
     const objNameToInsert = sourceDirectory.split('/').slice(-1)[0];
-    
+
     deleteDirectories(`DELETE ${sourceDirectory}`, directories)
-    insertDirectory({directories, targetDirectory, objNameToInsert, sourceObj})
+    insertDirectory(directories, targetDirectory, objNameToInsert, sourceObj)
 }
 
 const getSourceObj = (sourceDirectory, directories) => {
@@ -25,7 +24,7 @@ const getSourceObj = (sourceDirectory, directories) => {
 }
 
 
-const insertDirectory = ({directories, targetDirectory, objName, objValue}) => {
+const insertDirectory = (directories, targetDirectory, objName, objValue) => {
     let targetNode = directories;
     targetDirectory.split('/').forEach(path => {
         targetNode = targetNode[path];

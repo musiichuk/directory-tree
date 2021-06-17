@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-exports.getCommandsList = function () {    
+module.exports = function getCommandsList() {    
     try {
         const commandsList = fs.readFileSync('./commands.txt', 'utf8').split('\n');
         return commandsList;
